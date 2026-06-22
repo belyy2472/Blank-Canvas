@@ -168,8 +168,15 @@
     </footer>
     
     <!-- СКРИПТЫ -->
-         <!-- СКРИПТЫ -->
+       
     <script>
+        // ЗАПРЕЩАЕМ БРАУЗЕРУ СОХРАНЯТЬ ПОЗИЦИЮ СКРОЛЛА
+        if ('scrollRestoration' in history) {
+            history.scrollRestoration = 'manual';
+        }
+        window.scrollTo(0, 0);
+
+        // ... дальше идет ваш остальный скрипт (IntersectionObserver и т.д.) ...
         // Анимация появления элементов при скролле
         const revealObserver = new IntersectionObserver((entries, observer) => {
             entries.forEach(entry => {

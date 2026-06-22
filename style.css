@@ -233,21 +233,26 @@ footer { padding: 50px 5vw; border-top: 1px solid var(--border); text-align: cen
 /* =========================================
    11. АДАПТАЦИЯ ДЛЯ ТЕЛЕФОНОВ
    ========================================= */
-@media (max-width: 768px) {
-    header { padding: 15px 20px; flex-direction: column; gap: 15px; background: rgba(0,0,0,0.8); }
-    nav ul { flex-wrap: wrap; justify-content: center; gap: 15px; }
-    .hero h1 { font-size: 40px; }
+@media @media (max-width: 768px) {
+    /* Компактная шапка */
+    header { padding: 12px 15px; flex-direction: column; gap: 10px; background: rgba(0,0,0,0.9); }
+    nav ul { flex-wrap: wrap; justify-content: center; gap: 12px; }
+    nav a { font-size: 10px; }
+    
+    /* Исправление главного экрана */
+    .hero-content { padding-top: 80px; width: 100%; } /* Отодвинули текст от шапки */
+    .hero h1 { font-size: clamp(32px, 9vw, 45px); line-height: 1.1; margin-bottom: 15px; }
+    .hero p { font-size: 14px; max-width: 90%; margin: 0 auto 30px auto; line-height: 1.5; }
+    .btn { padding: 15px 35px; font-size: 11px; }
+
+    /* Исправление сетки */
     .portfolio-grid { grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
     .platforms-wrapper { gap: 8vw; }
     section { padding: 80px 5vw; }
     
-    /* Делаем текст кейсов видимым всегда на телефоне */
+    /* Эффекты карточек для телефона */
     .portfolio-overlay p { opacity: 1; transform: translateY(0); color: #cccccc; }
     .portfolio-overlay h3 { transform: translateY(0); }
-    
-    /* Видео становится чуть светлее, чтобы было понятно, что там есть контент */
-    .portfolio-item video { filter: grayscale(50%) brightness(0.6); }
-    
-    /* При нажатии на телефоне */
+    .portfolio-item video { filter: grayscale(30%) brightness(0.7); }
     .portfolio-item:active { transform: scale(0.98); }
 }
