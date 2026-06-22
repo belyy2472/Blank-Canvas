@@ -1,1 +1,295 @@
-# Blank-Canvas
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Production | Визуальные решения</title>
+    <!-- Шрифты -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    <!-- Иконки для соцсетей и стрелочек -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* БАЗОВЫЕ НАСТРОЙКИ */
+        :root {
+            --bg-color: #000000; 
+            --surface: rgba(255, 255, 255, 0.02);
+            --border: rgba(255, 255, 255, 0.08);
+            --text-main: #ffffff;
+            --text-muted: #888888;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        h1, h2, h3, .logo-text { font-family: 'Space Grotesk', sans-serif; }
+        a { text-decoration: none; color: inherit; }
+
+        /* ШАПКА И ЛОГОТИП */
+        header {
+            position: fixed;
+            top: 0; width: 100%;
+            padding: 25px 5vw;
+            display: flex; justify-content: space-between; align-items: center;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.9) 0%, transparent 100%);
+            z-index: 1000;
+        }
+
+        .brand { display: flex; align-items: center; gap: 15px; cursor: pointer; }
+        .brand img { width: 40px; height: 40px; object-fit: contain; }
+        .logo-text { font-size: 20px; font-weight: 700; letter-spacing: 4px; color: white; text-transform: uppercase; }
+
+        nav ul { list-style: none; display: flex; gap: 35px; }
+        nav a { font-size: 11px; text-transform: uppercase; letter-spacing: 3px; color: var(--text-muted); transition: 0.3s; }
+        nav a:hover { color: white; }
+
+        /* АНИМАЦИИ ПОЯВЛЕНИЯ */
+        .reveal {
+            opacity: 0; transform: translateY(40px);
+            transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+
+        /* ГЛАВНЫЙ ЭКРАН */
+        .hero {
+            height: 100vh;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            text-align: center; padding: 0 20px; position: relative;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.8) 70%, #000000 100%), 
+                        url('bg.jpg') center/cover no-repeat;
+        }
+
+        .hero h1 { font-size: 6vw; line-height: 1; margin-bottom: 20px; text-transform: uppercase; letter-spacing: -2px; }
+        .hero p { font-size: 16px; color: var(--text-muted); max-width: 500px; margin-bottom: 50px; font-weight: 300; }
+
+        /* КНОПКИ */
+        .btn {
+            padding: 18px 50px;
+            background: transparent; color: white;
+            font-size: 12px; font-weight: 500; text-transform: uppercase; letter-spacing: 2px;
+            border: 1px solid var(--border); border-radius: 40px; cursor: pointer; transition: all 0.4s;
+            display: inline-flex; align-items: center; gap: 10px;
+        }
+        .btn:hover { background: white; color: black; }
+        
+        /* Залитая кнопка для анкеты */
+        .btn-filled { background: white; color: black; border-color: white; }
+        .btn-filled:hover { background: transparent; color: white; border-color: var(--border); }
+
+        /* ОБЩИЙ СТИЛЬ СЕКЦИЙ */
+        section { padding: 120px 5vw; position: relative; z-index: 5; }
+        .section-title { font-size: 32px; margin-bottom: 80px; text-transform: uppercase; letter-spacing: -1px; text-align: center; }
+        .section-title span { color: #555; font-size: 14px; display: block; margin-bottom: 15px; letter-spacing: 3px; }
+
+        /* ПЛАТФОРМЫ */
+        .platforms-wrapper { display: flex; justify-content: center; align-items: center; gap: 6vw; flex-wrap: wrap; }
+        .platform-icon { font-size: 45px; color: #333; transition: all 0.4s ease; cursor: pointer; }
+        .platform-icon:hover.fa-instagram { color: #E1306C; transform: translateY(-10px); filter: drop-shadow(0 10px 20px rgba(225,48,108,0.4)); }
+        .platform-icon:hover.fa-telegram { color: #229ED9; transform: translateY(-10px); filter: drop-shadow(0 10px 20px rgba(34,158,217,0.4)); }
+        .platform-icon:hover.fa-vk { color: #4680C2; transform: translateY(-10px); filter: drop-shadow(0 10px 20px rgba(70,128,194,0.4)); }
+        .platform-icon:hover.fa-tiktok { color: #fff; transform: translateY(-10px); text-shadow: -2px -2px 0 #00f2fe, 2px 2px 0 #fe0049; }
+        .platform-icon:hover.fa-youtube { color: #FF0000; transform: translateY(-10px); filter: drop-shadow(0 10px 20px rgba(255,0,0,0.4)); }
+
+        /* УСЛУГИ */
+        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1px; background: var(--border); }
+        .service-card { background: var(--bg-color); padding: 60px 40px; transition: 0.4s; }
+        .service-card:hover { background: var(--surface); }
+        .service-card h3 { font-size: 20px; margin-bottom: 20px; }
+        .service-card p { font-size: 14px; color: var(--text-muted); line-height: 1.8; font-weight: 300; }
+
+        /* ПОРТФОЛИО */
+        .portfolio-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 40px; }
+        .portfolio-item { position: relative; border-radius: 8px; overflow: hidden; aspect-ratio: 16/9; cursor: pointer; background: #050505; border: 1px solid var(--border); }
+        .portfolio-item video { width: 100%; height: 100%; object-fit: cover; filter: grayscale(100%) brightness(0.4); transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
+        .play-icon { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 50px; color: rgba(255,255,255,0.5); transition: all 0.4s ease; z-index: 10; pointer-events: none; }
+        .portfolio-overlay { position: absolute; bottom: 0; left: 0; width: 100%; padding: 40px; background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, transparent 100%); transition: all 0.4s ease; pointer-events: none; }
+        .portfolio-overlay h3 { font-size: 20px; margin-bottom: 5px; transform: translateY(10px); transition: 0.4s; }
+        .portfolio-overlay p { font-size: 12px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 2px; transform: translateY(10px); opacity: 0; transition: 0.4s; }
+        
+        .portfolio-item:hover video { filter: grayscale(0%) brightness(1); transform: scale(1.03); }
+        .portfolio-item:hover .play-icon { opacity: 0; transform: translate(-50%, -50%) scale(1.5); }
+        .portfolio-item:hover .portfolio-overlay h3,
+        .portfolio-item:hover .portfolio-overlay p { transform: translateY(0); opacity: 1; }
+
+        /* АНКЕТА / БРИФ (Новый блок) */
+        .brief-section {
+            background: linear-gradient(to bottom, #050505, #000000);
+            text-align: center;
+            padding: 150px 5vw;
+            border-top: 1px solid var(--border);
+        }
+        
+        .brief-content { max-width: 600px; margin: 0 auto; }
+        .brief-content p {
+            font-size: 16px; color: var(--text-muted); line-height: 1.6; font-weight: 300; margin-bottom: 40px;
+        }
+
+        /* КОНТАКТЫ */
+        footer { padding: 50px 5vw 50px; border-top: 1px solid var(--border); text-align: center; }
+        .contact-links { display: flex; justify-content: center; gap: 20px; margin-bottom: 60px; flex-wrap: wrap; }
+        .contact-card { padding: 40px; border: 1px solid var(--border); width: 280px; transition: 0.4s; }
+        .contact-card:hover { border-color: white; background: var(--surface); }
+        .contact-card span { display: block; font-size: 11px; color: #666; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 15px; }
+        .contact-card a { font-size: 18px; font-weight: 500; }
+        .copyright { color: #444; font-size: 12px; letter-spacing: 1px; }
+
+        @media (max-width: 768px) {
+            header { padding: 20px; flex-direction: column; gap: 20px; background: black; }
+            nav ul { flex-wrap: wrap; justify-content: center; gap: 15px; }
+            .hero h1 { font-size: 40px; }
+            .portfolio-grid { grid-template-columns: 1fr; }
+            .platforms-wrapper { gap: 8vw; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ШАПКА -->
+    <header>
+        <div class="brand" onclick="window.scrollTo(0,0)">
+            <img src="logo.png" alt="Логотип" onerror="this.style.display='none'"> 
+            <span class="logo-text">Production</span>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#platforms">Платформы</a></li>
+                <li><a href="#services">Услуги</a></li>
+                <li><a href="#portfolio">Кейсы</a></li>
+                <li><a href="#brief">Бриф</a></li> <!-- Добавлена кнопка Бриф в меню -->
+            </ul>
+        </nav>
+    </header>
+
+    <!-- ГЛАВНЫЙ ЭКРАН -->
+    <section class="hero reveal">
+        <h1>Эстетика<br>в каждом кадре</h1>
+        <p>Создаем визуальные решения с интригующим минимализмом. От сценария до финального монтажа и продвижения.</p>
+        <a href="#brief" class="btn">Создать проект</a>
+    </section>
+
+    <!-- ПЛАТФОРМЫ -->
+    <section id="platforms">
+        <h2 class="section-title reveal"><span>Дистрибуция контента</span> Платформы</h2>
+        <div class="platforms-wrapper reveal">
+            <i class="fa-brands fa-instagram platform-icon"></i>
+            <i class="fa-brands fa-telegram platform-icon"></i>
+            <i class="fa-brands fa-vk platform-icon"></i>
+            <i class="fa-brands fa-tiktok platform-icon"></i>
+            <i class="fa-brands fa-youtube platform-icon"></i>
+        </div>
+    </section>
+
+    <!-- УСЛУГИ -->
+    <section id="services">
+        <h2 class="section-title reveal"><span>Экспертиза</span> Что мы делаем</h2>
+        <div class="services-grid reveal">
+            <div class="service-card">
+                <h3>Монтаж видео</h3>
+                <p>Чистый кат-монтаж, саунд-дизайн и цветокоррекция кинематографичного уровня. Мы вырезаем лишнее, оставляя только суть и динамику.</p>
+            </div>
+            <div class="service-card">
+                <h3>Сценарий</h3>
+                <p>Архитектура смыслов. Продумываем хуки, сторителлинг и удержание внимания аудитории с первых секунд.</p>
+            </div>
+            <div class="service-card">
+                <h3>Продвижение</h3>
+                <p>Работаем с алгоритмами. Анализируем тренды, создаем контент-стратегии и обеспечиваем органический рост проектов.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ПОРТФОЛИО -->
+    <section id="portfolio">
+        <h2 class="section-title reveal"><span>Шоурил</span> Избранные кейсы</h2>
+        <div class="portfolio-grid">
+            
+            <div class="portfolio-item reveal">
+                <video src="https://cdn.coverr.co/videos/coverr-a-man-working-on-his-laptop-2856/1080p.mp4" muted loop playsinline></video>
+                <i class="fa-solid fa-play play-icon"></i>
+                <div class="portfolio-overlay">
+                    <h3>Бренд одежды</h3>
+                    <p>Reels • Монтаж</p>
+                </div>
+            </div>
+
+            <div class="portfolio-item reveal" style="transition-delay: 0.1s;">
+                <video src="https://cdn.coverr.co/videos/coverr-dj-mixing-music-in-a-club-5250/1080p.mp4" muted loop playsinline></video>
+                <i class="fa-solid fa-play play-icon"></i>
+                <div class="portfolio-overlay">
+                    <h3>Артист / DJ</h3>
+                    <p>Промо • TikTok</p>
+                </div>
+            </div>
+
+            <div class="portfolio-item reveal" style="transition-delay: 0.2s;">
+                <video src="https://cdn.coverr.co/videos/coverr-fashion-model-posing-in-a-studio-7036/1080p.mp4" muted loop playsinline></video>
+                <i class="fa-solid fa-play play-icon"></i>
+                <div class="portfolio-overlay">
+                    <h3>Fashion кампейн</h3>
+                    <p>YouTube • Сценарий</p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- СЕКЦИЯ С АНКЕТОЙ (БРИФ) -->
+    <section id="brief" class="brief-section reveal">
+        <div class="brief-content">
+            <h2 class="section-title" style="margin-bottom: 30px;"><span>Начать проект</span> Заполнить бриф</h2>
+            <p>Расскажите нам о вашей задаче, бизнес-целях и референсах. Мы внимательно изучим информацию и вернемся к вам с готовым концептуальным решением.</p>
+            <!-- ССЫЛКА НА ВАШУ GOOGLE ФОРМУ -->
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSf7nuFdeDdjJe6Bgsn7Mg1mupMxiICfzl_mXEz2fYyOsfv13A/viewform?usp=dialog" target="_blank" class="btn btn-filled">
+                Перейти к анкете <i class="fa-solid fa-arrow-right"></i>
+            </a>
+        </div>
+    </section>
+
+    <!-- КОНТАКТЫ -->
+    <footer id="contact">
+        <div class="contact-links reveal">
+            <div class="contact-card">
+                <span>Telegram</span>
+                <a href="https://t.me/belyy2472" target="_blank">@belyy2472</a>
+            </div>
+            <div class="contact-card">
+                <span>WhatsApp / Phone</span>
+                <a href="tel:+375298224524">+375 29 822-45-24</a>
+            </div>
+        </div>
+        <p class="copyright">© 2024 PRODUCTION. Сделано с акцентом на визуал.</p>
+    </footer>
+
+    <!-- СКРИПТЫ -->
+    <script>
+        // Анимация появления блоков
+        const revealObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1, rootMargin: "0px 0px -50px 0px" });
+        
+        document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+        // Воспроизведение видео при наведении
+        document.querySelectorAll('.portfolio-item').forEach(item => {
+            const video = item.querySelector('video');
+            item.addEventListener('mouseenter', () => video.play());
+            item.addEventListener('mouseleave', () => {
+                video.pause();
+                // video.currentTime = 0; // раскомментируйте, если нужно сбрасывать видео в начало
+            });
+        });
+    </script>
+</body>
+</html>
