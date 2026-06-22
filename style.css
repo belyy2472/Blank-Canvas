@@ -220,15 +220,56 @@ footer { padding: 50px 5vw; border-top: 1px solid var(--border); text-align: cen
 .copyright { color: #444; font-size: 12px; letter-spacing: 1px; }
 
 /* =========================================
-   11. АДАПТАЦИЯ ДЛЯ ТЕЛЕФОНОВ
+   ДОПОЛНИТЕЛЬНЫЕ JS-ЭФФЕКТЫ (КУРСОР)
    ========================================= */
-@media (max-width: 768px) {
-    header { padding: 15px 20px; flex-direction: column; gap: 15px; background: rgba(0,0,0,0.8); }
-    nav ul { flex-wrap: wrap; justify-content: center; gap: 15px; }
-    .hero h1 { font-size: 40px; }
-    .portfolio-grid { grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
-    .platforms-wrapper { gap: 8vw; }
-    section { padding: 80px 5vw; }
+/* Скрываем стандартный курсор на ПК */
+@media (min-width: 769px) {
+    body, a, .btn, .portfolio-item, .brand, .platform-icon {
+        cursor: none !important;
+    }
+}
+
+.cursor-dot, .cursor-outline {
+    position: fixed;
+    top: 0; left: 0;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    z-index: 9999;
+    pointer-events: none;
+}
+
+.cursor-dot {
+    width: 6px; 
+    height: 6px;
+    background-color: white;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.cursor-outline {
+    width: 40px; 
+    height: 40px;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    /* Плавность для эффекта "догоняющего" кольца */
+    transition: width 0.2s, height 0.2s, background-color 0.2s, border-color 0.2s;
+}
+
+/* Эффект, когда курсор наведен на кнопку или видео */
+.cursor-outline.hovered {
+    width: 80px;
+    height: 80px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-color: transparent;
+    backdrop-filter: blur(3px); /* Легкое размытие под курсором */
+}
+
+.cursor-dot.hovered {
+    opacity: 0; /* Прячем точку при наведении */
+}
+
+/* Плавный переход для текста на главном экране (параллакс) */
+.hero-content {
+    transition: transform 0.1s linear;
+    will-change: transform;
 }
 /* =========================================
    11. АДАПТАЦИЯ ДЛЯ ТЕЛЕФОНОВ
