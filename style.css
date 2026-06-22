@@ -230,3 +230,24 @@ footer { padding: 50px 5vw; border-top: 1px solid var(--border); text-align: cen
     .platforms-wrapper { gap: 8vw; }
     section { padding: 80px 5vw; }
 }
+/* =========================================
+   11. АДАПТАЦИЯ ДЛЯ ТЕЛЕФОНОВ
+   ========================================= */
+@media (max-width: 768px) {
+    header { padding: 15px 20px; flex-direction: column; gap: 15px; background: rgba(0,0,0,0.8); }
+    nav ul { flex-wrap: wrap; justify-content: center; gap: 15px; }
+    .hero h1 { font-size: 40px; }
+    .portfolio-grid { grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+    .platforms-wrapper { gap: 8vw; }
+    section { padding: 80px 5vw; }
+    
+    /* Делаем текст кейсов видимым всегда на телефоне */
+    .portfolio-overlay p { opacity: 1; transform: translateY(0); color: #cccccc; }
+    .portfolio-overlay h3 { transform: translateY(0); }
+    
+    /* Видео становится чуть светлее, чтобы было понятно, что там есть контент */
+    .portfolio-item video { filter: grayscale(50%) brightness(0.6); }
+    
+    /* При нажатии на телефоне */
+    .portfolio-item:active { transform: scale(0.98); }
+}
