@@ -214,24 +214,26 @@
         });
 
         // Для телефонов: видео играет само, когда появляется на экране (как в ленте Instagram)
-        if (isMobile) {
-            const videoObserver = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    const video = entry.target.querySelector('video');
-                    if (entry.isIntersecting) {
+         if (isMobile) {
+            // ... (тут ваш старый код с videoObserver) ...
+
+            // ДОБАВЛЯЕМ ВОТ ЭТО:
+            // Если видео заблокировано энергосбережением, включаем по клику
+            document.querySelectorAll('.portfolio-item').forEach(item => {
+                item.addEventListener('click', () => {
+                    const video = item.querySelector('video');
+                    const icon = item.querySelector('.play-icon');
+                    
+                    if (video.paused) {
                         video.play();
-                        entry.target.querySelector('.play-icon').style.opacity = '0';
+                        icon.style.opacity = '0';
                         video.style.filter = 'grayscale(0%) brightness(1)';
                     } else {
                         video.pause();
-                        entry.target.querySelector('.play-icon').style.opacity = '1';
+                        icon.style.opacity = '1';
                         video.style.filter = 'grayscale(50%) brightness(0.6)';
                     }
                 });
-            }, { threshold: 0.5 }); // Срабатывает, когда половина видео на экране
-
-            document.querySelectorAll('.portfolio-item').forEach(item => {
-                videoObserver.observe(item);
             });
         }
                 // ==========================================

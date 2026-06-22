@@ -271,7 +271,6 @@ footer { padding: 50px 5vw; border-top: 1px solid var(--border); text-align: cen
     transition: transform 0.1s linear;
     will-change: transform;
 }
-/* =========================================
    11. АДАПТАЦИЯ ДЛЯ ТЕЛЕФОНОВ
    ========================================= */
 /* =========================================
@@ -279,6 +278,10 @@ footer { padding: 50px 5vw; border-top: 1px solid var(--border); text-align: cen
    ========================================= */
 @media (max-width: 768px) {
     /* 1. ИСПРАВЛЕНИЕ ШАПКИ И ВКЛАДОК */
+    @media (max-width: 768px) {
+    /* ПОЛНОСТЬЮ ОТКЛЮЧАЕМ КУРСОР НА ТЕЛЕФОНЕ */
+    .cursor-dot, .cursor-outline { display: none !important; }
+   
     header { 
         padding: 15px 10px; 
         flex-direction: column; 
@@ -306,6 +309,11 @@ footer { padding: 50px 5vw; border-top: 1px solid var(--border); text-align: cen
     }
 
     /* 2. ИСПРАВЛЕНИЕ ПЕРВОГО ЭКРАНА */
+    .hero {
+    min-height: 100vh; /* Для старых браузеров */
+    min-height: 100svh; /* Специально для iPhone и Telegram браузеров */
+    /* остальные ваши настройки .hero оставляем как есть */
+}
     .hero-content { 
         padding-top: 120px; /* Сильно опускаем текст, чтобы шапка его не перекрывала */
         width: 90%; 
