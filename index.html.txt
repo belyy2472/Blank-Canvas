@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Название Продакшена | Портфолио</title>
+    <!-- Подключаем красивый шрифт Montserrat -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* БАЗОВЫЕ НАСТРОЙКИ (Темная тема) */
+        :root {
+            --bg-color: #050505; /* Глубокий черный */
+            --surface-color: #111111; /* Темно-серый для карточек */
+            --text-color: #ffffff;
+            --accent-color: #d4af37; /* Премиальный золотой (можно заменить на любой) */
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+            color: var(--text-color);
+            transition: color 0.3s;
+        }
+
+        a:hover {
+            color: var(--accent-color);
+        }
+
+        /* ШАПКА */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 20px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(5, 5, 5, 0.9);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .logo span {
+            color: var(--accent-color);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 30px;
+        }
+
+        nav ul li a {
+            font-size: 14px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* ГЛАВНЫЙ ЭКРАН (HERO) */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.8)), url('https://images.unsplash.com/photo-1601513445498-5bf236d933e1?q=80&w=2070&auto=format&fit=crop') center/cover;
+            padding: 0 20px;
+        }
+
+        .hero h1 {
+            font-size: 50px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+
+        .hero p {
+            font-size: 18px;
+            max-width: 600px;
+            margin-bottom: 40px;
+            color: #cccccc;
+        }
+
+        .btn {
+            padding: 15px 40px;
+            background-color: transparent;
+            color: var(--accent-color);
+            border: 1px solid var(--accent-color);
+            font-size: 16px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: var(--accent-color);
+            color: var(--bg-color);
+        }
+
+        /* ОТСТУПЫ СЕКЦИЙ */
+        section {
+            padding: 100px 10vw;
+        }
+
+        .section-title {
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 60px;
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        /* УСЛУГИ */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .service-card {
+            background-color: var(--surface-color);
+            padding: 40px 30px;
+            border-radius: 5px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid #222;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            border-color: var(--accent-color);
+        }
+
+        .service-card h3 {
+            font-size: 22px;
+            margin-bottom: 15px;
+        }
+
+        .service-card p {
+            color: #999;
+            font-size: 14px;
+        }
+
+        /* КЕЙСЫ (ПОРТФОЛИО) */
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 20px;
+        }
+
+        .portfolio-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 5px;
+            aspect-ratio: 16 / 9;
+            cursor: pointer;
+        }
+
+        .portfolio-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .portfolio-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .portfolio-item:hover img {
+            transform: scale(1.05);
+        }
+
+        .portfolio-item:hover .portfolio-overlay {
+            opacity: 1;
+        }
+
+        .portfolio-overlay h3 {
+            font-size: 24px;
+            margin-bottom: 10px;
+            transform: translateY(20px);
+            transition: transform 0.3s ease;
+        }
+
+        .portfolio-overlay p {
+            color: var(--accent-color);
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transform: translateY(20px);
+            transition: transform 0.3s ease;
+        }
+
+        .portfolio-item:hover .portfolio-overlay h3,
+        .portfolio-item:hover .portfolio-overlay p {
+            transform: translateY(0);
+        }
+
+        /* ФУТЕР / КОНТАКТЫ */
+        footer {
+            background-color: #000;
+            padding: 80px 10vw 40px;
+            text-align: center;
+            border-top: 1px solid #222;
+        }
+
+        .contact-info {
+            margin-bottom: 40px;
+        }
+
+        .contact-info h2 {
+            font-size: 32px;
+            margin-bottom: 20px;
+        }
+
+        .contact-info p {
+            color: #999;
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+
+        .contact-info a {
+            color: var(--accent-color);
+        }
+
+        .copyright {
+            color: #555;
+            font-size: 12px;
+            margin-top: 50px;
+        }
+
+        /* АДАПТАЦИЯ ДЛЯ ТЕЛЕФОНОВ */
+        @media (max-width: 768px) {
+            header {
+                padding: 15px 20px;
+                flex-direction: column;
+                gap: 15px;
+            }
+            nav ul {
+                gap: 15px;
+            }
+            .hero h1 {
+                font-size: 36px;
+            }
+            .hero p {
+                font-size: 16px;
+            }
+            section {
+                padding: 80px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- НАВИГАЦИЯ -->
+    <header>
+        <div class="logo">PRO<span>DACTION</span></div>
+        <nav>
+            <ul>
+                <li><a href="#about" class="scroll-link">О нас</a></li>
+                <li><a href="#services" class="scroll-link">Услуги</a></li>
+                <li><a href="#portfolio" class="scroll-link">Кейсы</a></li>
+                <li><a href="#contact" class="scroll-link">Контакты</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- ГЛАВНЫЙ ЭКРАН -->
+    <section class="hero" id="about">
+        <h1>Создаем визуальную магию</h1>
+        <p>Полный цикл видеопроизводства от идеи до постпродакшена. Мы делаем контент, который решает задачи бизнеса и захватывает внимание.</p>
+        <a href="#portfolio" class="btn scroll-link">Смотреть шоурил</a>
+    </section>
+
+    <!-- БЛОК УСЛУГ -->
+    <section id="services">
+        <h2 class="section-title">Наши Услуги</h2>
+        <div class="services-grid">
+            <div class="service-card">
+                <h3>Видеосъемка</h3>
+                <p>Рекламные ролики, музыкальные клипы, корпоративные фильмы и репортажная съемка на кинокамеры.</p>
+            </div>
+            <div class="service-card">
+                <h3>Постпродакшен</h3>
+                <p>Профессиональный монтаж, цветокоррекция, саунд-дизайн и работа со звуком.</p>
+            </div>
+            <div class="service-card">
+                <h3>Motion Design</h3>
+                <p>2D и 3D анимация, инфографика, создание визуальных эффектов (VFX) и титров.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- БЛОК КЕЙСОВ (ПОРТФОЛИО) -->
+    <section id="portfolio">
+        <h2 class="section-title">Наши Кейсы</h2>
+        <div class="portfolio-grid">
+            <!-- Кейс 1 -->
+            <div class="portfolio-item">
+                <img src="https://images.unsplash.com/photo-1578885136359-16c80b164ebc?q=80&w=2000&auto=format&fit=crop" alt="Кейс 1">
+                <div class="portfolio-overlay">
+                    <h3>Бренд одежды "Nite"</h3>
+                    <p>Рекламный кампейн</p>
+                </div>
+            </div>
+            <!-- Кейс 2 -->
+            <div class="portfolio-item">
+                <img src="https://images.unsplash.com/photo-1536440136628-849c177e76a1?q=80&w=2000&auto=format&fit=crop" alt="Кейс 2">
+                <div class="portfolio-overlay">
+                    <h3>Автомобильный бренд</h3>
+                    <p>Промо-ролик для ТВ</p>
+                </div>
+            </div>
+            <!-- Кейс 3 -->
+            <div class="portfolio-item">
+                <img src="https://images.unsplash.com/photo-1594122230687-858482b4fcb5?q=80&w=2000&auto=format&fit=crop" alt="Кейс 3">
+                <div class="portfolio-overlay">
+                    <h3>Музыкальный клип</h3>
+                    <p>Режиссура и VFX</p>
+                </div>
+            </div>
+            <!-- Кейс 4 -->
+            <div class="portfolio-item">
+                <img src="https://images.unsplash.com/photo-1626814026160-2237a95fc5a0?q=80&w=2000&auto=format&fit=crop" alt="Кейс 4">
+                <div class="portfolio-overlay">
+                    <h3>Tech Конференция 2023</h3>
+                    <p>Отчетное видео</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- КОНТАКТЫ И ФУТЕР -->
+    <footer id="contact">
+        <div class="contact-info">
+            <h2>Давайте создадим что-то крутое</h2>
+            <p>Готовы обсудить ваш проект?</p>
+            <br>
+            <p>Телефон: <a href="tel:+79991234567">+7 (999) 123-45-67</a></p>
+            <p>Email: <a href="mailto:hello@production.ru">hello@production.ru</a></p>
+            <p>Telegram: <a href="#">@your_telegram</a></p>
+        </div>
+        <p class="copyright">© 2023 PRODACTION. Все права защищены.</p>
+    </footer>
+
+    <!-- СКРИПТ ДЛЯ ПЛАВНОЙ ПРОКРУТКИ -->
+    <script>
+        document.querySelectorAll('.scroll-link').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                document.querySelector(targetId).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
