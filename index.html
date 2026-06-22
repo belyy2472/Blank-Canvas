@@ -31,6 +31,14 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+     <!-- ЖЕСТКИЙ СБРОС СКРОЛЛА ДЛЯ ТЕЛЕФОНОВ -->
+    <script>
+        history.scrollRestoration = "manual";
+        window.onbeforeunload = function () { window.scrollTo(0, 0); }
+        window.onload = function() { setTimeout(function() { window.scrollTo(0, 0); }, 10); }
+    </script>
+    
+    <!-- Дальше идет ваша шапка <header> и т.д. -->
     <!-- КАСТОМНЫЙ КУРСОР -->
     <div class="cursor-dot"></div>
     <div class="cursor-outline"></div>    
