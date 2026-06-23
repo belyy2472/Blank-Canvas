@@ -663,80 +663,106 @@ body.loaded .loader-bottom { transform: translateY(100%); }
   
    /*11. АДАПТАЦИЯ ДЛЯ ТЕЛЕФОНОВ (ЖЕСТКАЯ ФИКСАЦИЯ)/
    ========================================= */
+/* =========================================
+   11. ИДЕАЛЬНАЯ АДАПТАЦИЯ ДЛЯ ТЕЛЕФОНОВ
+   ========================================= */
 @media (max-width: 768px) {
-    /* 1. ИСПРАВЛЕНИЕ ШАПКИ И ВКЛАДОК */
-    @media (max-width: 768px) {
-    /* ПОЛНОСТЬЮ ОТКЛЮЧАЕМ КУРСОР НА ТЕЛЕФОНЕ */
-    .cursor-dot, .cursor-outline { display: none !important; }
-   
-    header { 
-        padding: 15px 10px; 
-        flex-direction: column; 
-        gap: 15px; 
-        background: rgba(0,0,0,0.95); /* Более плотный фон, чтобы текст не сливался */
+    /* Отключаем тяжелые эффекты и курсор */
+    .cursor-dot, .cursor-outline, .floating-stickers, .platform-tooltip { 
+        display: none !important; 
     }
     
-    .brand { font-size: 20px; text-align: center; }
+    /* Фикс шапки: делаем её компактной и размытой */
+    header { 
+        padding: 10px 15px; 
+        flex-direction: column; 
+        gap: 10px; 
+        background: rgba(5, 5, 5, 0.85); 
+        backdrop-filter: blur(15px);
+        -webkit-backdrop-filter: blur(15px);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    
+    .brand img { width: 30px; height: 30px; }
+    .logo-text { font-size: 16px; letter-spacing: 2px; }
 
-    /* Делаем вкладки аккуратными кнопками-тегами, чтобы они не кривились */
     nav ul { 
         display: flex; 
         flex-wrap: wrap; 
         justify-content: center; 
-        gap: 8px; 
+        gap: 6px; 
         width: 100%;
     }
     
     nav a { 
-        font-size: 11px; 
-        padding: 8px 12px; 
-        background: rgba(255, 255, 255, 0.1); 
+        font-size: 10px; 
+        padding: 6px 12px; 
+        background: rgba(255, 255, 255, 0.05); 
+        border: 1px solid rgba(255, 255, 255, 0.1);
         border-radius: 20px; 
-        white-space: nowrap; /* Запрещаем тексту во вкладках переноситься на 2 строки */
+        white-space: nowrap;
     }
 
-    /* 2. ИСПРАВЛЕНИЕ ПЕРВОГО ЭКРАНА */
-    
+    /* Главный экран: фикс высоты для мобильных браузеров */
+    .hero {
+        height: 100vh; /* Фолбэк */
+        height: 100dvh; /* Динамическая высота для iOS/Android */
+    }
+
     .hero-content { 
-        padding-top: 120px; /* Сильно опускаем текст, чтобы шапка его не перекрывала */
-        width: 90%; 
-        margin: 0 auto;
+        padding-top: 80px; 
+        width: 95%; 
     }
     
-    .hero h1 { font-size: 32px; line-height: 1.2; margin-bottom: 20px; }
-    .hero p { font-size: 14px; margin-bottom: 30px; }
+    .hero h1 { font-size: 38px; line-height: 1.1; margin-bottom: 15px; }
+    .hero p { font-size: 14px; margin-bottom: 30px; padding: 0 10px; }
 
-    /* 3. ИСПРАВЛЕНИЕ КРИВЫХ ВИДЕО (СТРОГО 1 КОЛОНКА) */
+    /* Отступы секций */
+    section { padding: 80px 15px; }
+    .section-title { font-size: 26px; margin-bottom: 40px; }
+
+    /* Услуги */
+    .services-grid { gap: 15px; margin-top: 30px; }
+    .service-card { padding: 25px 20px; border-radius: 16px; }
+    .service-card h3 { font-size: 18px; margin-bottom: 10px; }
+    .service-card p { font-size: 13px; }
+
+    /* Сетка портфолио (Reels) */
     .portfolio-grid { 
-        display: grid;
-        grid-template-columns: 1fr; /* Только одно видео в ряд! Никаких сжатий */
-        gap: 20px; 
-        padding: 0 10px; /* Отступы от краев экрана */
+        grid-template-columns: 1fr; 
+        gap: 25px; 
     }
 
-    /* Жестко фиксируем пропорции видео (9:16 - вертикальные Reels), чтобы страница не прыгала */
     .portfolio-item { 
-        width: 100%;
-        aspect-ratio: 9 / 16; /* Каркас загружается сразу, сайт не дергается */
+        aspect-ratio: 9 / 16; 
         height: auto;
+        border-radius: 12px;
     }
 
+    /* Всегда показываем текст на карточках с видео на телефоне */
     .portfolio-overlay {
-        background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, transparent 60%);
+        background: linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.5) 40%, transparent 100%);
+    }
+    .portfolio-overlay p { opacity: 1; transform: translateY(0); font-size: 11px; }
+    .portfolio-overlay h3 { transform: translateY(0); font-size: 16px; margin-bottom: 2px;}
+    .play-icon { font-size: 40px; opacity: 1; }
+
+    /* Иконки платформ */
+    .platforms-wrapper { gap: 20px; }
+    .platform-icon { font-size: 35px; }
+
+    /* Форма брифа */
+    .brief-card { padding: 25px 15px; border-radius: 16px; }
+    .brief-form { gap: 15px; }
+    
+    /* ВАЖНО: Фикс для iPhone (чтобы экран не зуммировался при вводе) */
+    .form-control { 
+        font-size: 16px !important; 
+        padding: 14px; 
     }
 
-    /* Текст на видео всегда виден с телефона */
-    .portfolio-overlay p { opacity: 1; transform: translateY(0); font-size: 13px; }
-    .portfolio-overlay h3 { transform: translateY(0); font-size: 18px; }
-    .play-icon { font-size: 30px; }
-
-    /* 4. ИСПРАВЛЕНИЕ ИКОНОК ПЛАТФОРМ */
-    .platforms-wrapper { flex-wrap: wrap; justify-content: center; gap: 25px; }
-    .platform-icon { width: 40px; height: 40px; font-size: 20px; }
-    
-    /* Общие отступы секций */
-    section { padding: 60px 0; }
-    .section-title { font-size: 28px; margin-bottom: 30px; }
-}
+    /* Футер */
+    .contact-links { flex-direction: column; gap: 15px; align-items: center; }
+    .contact-card { width: 100%; max-width: 320px; padding: 30px 20px; }
 }
                                                                
