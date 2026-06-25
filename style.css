@@ -292,6 +292,18 @@ body.loaded .loader-bottom { transform: translateY(100%); }
    12. ИДЕАЛЬНАЯ АДАПТАЦИЯ ДЛЯ ТЕЛЕФОНОВ
    ========================================= */
 @media (max-width: 768px) {
+        /* Настройки 3D Слайдера Услуг для телефона */
+    .services-grid { display: flex; margin-top: 20px; gap: 0; } /* Отменяем сетку ПК */
+    .swiper { width: 100%; padding-top: 20px; padding-bottom: 50px; overflow: hidden; }
+    .swiper-slide { width: 300px; height: auto; }
+    .swiper-slide .service-card { height: 100%; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+    
+    /* Точки под слайдером */
+    .swiper-pagination-bullet { background: #888; }
+    .swiper-pagination-bullet-active { background: #a3e635; }
+
+    /* Отключаем параллакс шапки для ПК, оставляем только плавность для мобильных */
+    header { transition: transform 0.4s ease, background 0.4s ease; }
     .cursor-dot, .cursor-outline, .floating-stickers, .platform-tooltip { display: none !important; }
     
     header { padding: 10px 15px; flex-direction: column; gap: 10px; background: rgba(5, 5, 5, 0.85); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); border-bottom: 1px solid rgba(255, 255, 255, 0.05); }
