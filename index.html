@@ -4,35 +4,69 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Production | Визуальные решения</title>
-
+    
     <link rel="icon" type="image/png" href="logo.png">
-
+    
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
-
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-    <!-- Swiper должен быть ДО style.css -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
-
-    <!-- Твой основной CSS -->
+    
+    <!-- ВАЖНО: Библиотека Swiper должна быть ДО style.css -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    
+    <!-- Твой файл стилей -->
     <link rel="stylesheet" href="style.css">
-
+    
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-</head>
 
+    <style>
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .btn, .submit-btn {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .ripple {
+            position: absolute;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.4);
+            transform: scale(0);
+            animation: ripple-effect 0.6s linear;
+            pointer-events: none;
+        }
+
+        @keyframes ripple-effect {
+            to { transform: scale(4); opacity: 0; }
+        }
+    </style>
+</head>
 <body>
     <div class="loader-shutter loader-top"></div>
     <div class="loader-shutter loader-bottom"></div>
-
+    
+    <script>
+        history.scrollRestoration = "manual";
+        window.onbeforeunload = function () { window.scrollTo(0, 0); }
+        window.onload = function() { setTimeout(function() { window.scrollTo(0, 0); }, 10); }
+    </script>
+    
     <div class="cursor-dot"></div>
-    <div class="cursor-outline"></div>
-
+    <div class="cursor-outline"></div>    
+     
     <header>
-        <div class="brand" onclick="window.scrollTo(0, 0)">
-            <img src="logo.png" alt="Логотип" onerror="this.style.display='none'">
+        <div class="brand" onclick="window.scrollTo(0,0)">
+            <img src="logo.png" alt="Логотип" onerror="this.style.display='none'"> 
             <span class="logo-text">Production</span>
         </div>
-
         <nav>
             <ul>
                 <li><a href="#platforms">Платформы</a></li>
@@ -46,7 +80,6 @@
     <section class="hero reveal">
         <video class="hero-video" src="1.mp4" autoplay loop muted playsinline></video>
         <div class="hero-overlay"></div>
-
         <div class="hero-content">
             <h1>Эстетика<br>в каждом кадре</h1>
             <p>Создаем визуальные решения с интригующим минимализмом. От сценария до финального монтажа и продвижения.</p>
@@ -54,85 +87,56 @@
         </div>
     </section>
 
-    <section id="services" class="services-section">
-        <div class="floating-stickers">
-            <div class="sticker sticker-1">🎥 4K / 8K Cinema</div>
-            <div class="sticker sticker-2">🎬 DaVinci Resolve</div>
-            <div class="sticker sticker-4">✨ Color Grading</div>
-        </div>
+<section id="services" class="services-section">
+    <div class="floating-stickers">
+        <div class="sticker sticker-1">🎥 4K / 8K Cinema</div>
+        <div class="sticker sticker-2">🎬 DaVinci Resolve</div>
+        <div class="sticker sticker-4">✨ Color Grading</div>
+    </div>
 
-        <div class="container">
-            <h2 class="section-title reveal">ЭКСПЕРТИЗА</h2>
-
-            <div class="swiper mySwiper">
-                <div class="swiper-wrapper services-grid">
-                    <div class="swiper-slide service-card reveal">
-                        <div class="service-icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                                <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path>
-                                <circle cx="12" cy="13" r="4"></circle>
-                            </svg>
-                        </div>
-                        <h3>Съемка видео</h3>
-                        <p>Коммерческие ролики, музыкальные клипы, интервью. Киношная картинка и топовое оборудование.</p>
-                    </div>
-
-                    <div class="swiper-slide service-card reveal" style="transition-delay: 0.1s;">
-                        <div class="service-icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                                <circle cx="6" cy="6" r="3"></circle>
-                                <circle cx="6" cy="18" r="3"></circle>
-                                <line x1="20" y1="4" x2="8.12" y2="15.88"></line>
-                                <line x1="14.47" y1="14.48" x2="20" y2="20"></line>
-                                <line x1="8.12" y1="8.12" x2="12" y2="12"></line>
-                            </svg>
-                        </div>
-                        <h3>Монтаж & VFX</h3>
-                        <p>Динамичный кат, саунд-дизайн, подбор лицензионной музыки и добавление визуальных эффектов.</p>
-                    </div>
-
-                    <div class="swiper-slide service-card reveal" style="transition-delay: 0.2s;">
-                        <div class="service-icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                                <circle cx="12" cy="12" r="10"></circle>
-                                <line x1="12" y1="16" x2="12" y2="12"></line>
-                                <line x1="12" y1="8" x2="12.01" y2="8"></line>
-                            </svg>
-                        </div>
-                        <h3>Цветокоррекция</h3>
-                        <p>Профессиональный color grading. Создание нужной атмосферы и дорогого голливудского лука.</p>
-                    </div>
-
-                    <div class="swiper-slide service-card reveal" style="transition-delay: 0.3s;">
-                        <div class="service-icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                                <rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect>
-                                <line x1="12" y1="18" x2="12.01" y2="18"></line>
-                            </svg>
-                        </div>
-                        <h3>Reels / TikTok</h3>
-                        <p>Вертикальный контент, который залетает в реки. Съемка, динамичный монтаж и адаптация.</p>
-                    </div>
-
-                    <div class="swiper-slide service-card reveal" style="transition-delay: 0.4s;">
-                        <div class="service-icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="m12 3-1.9 5.8a2 2 0 0 1-1.3 1.3L3 12l5.8 1.9a2 2 0 0 1 1.3 1.3L12 21l1.9-5.8a2 2 0 0 1 1.3-1.3L21 12l-5.8-1.9a2 2 0 0 1-1.3-1.3L12 3Z"></path>
-                            </svg>
-                        </div>
-                        <h3>AI & Нейросети</h3>
-                        <p>Генерация футажа, студийная переозвучка на другие языки, идеальный липсинк и аватары.</p>
-                    </div>
+    <div class="container">
+        <h2 class="section-title reveal">ЭКСПЕРТИЗА</h2>
+        
+        <div class="swiper mySwiper">
+            <div class="swiper-wrapper services-grid">
+                
+                <div class="swiper-slide service-card reveal">
+                    <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path><circle cx="12" cy="13" r="4"></circle></svg></div>
+                    <h3>Съемка видео</h3>
+                    <p>Коммерческие ролики, музыкальные клипы, интервью. Киношная картинка и топовое оборудование.</p>
                 </div>
 
-                <div class="swiper-pagination"></div>
+                <div class="swiper-slide service-card reveal" style="transition-delay: 0.1s;">
+                    <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="6" cy="6" r="3"></circle><circle cx="6" cy="18" r="3"></circle><line x1="20" y1="4" x2="8.12" y2="15.88"></line><line x1="14.47" y1="14.48" x2="20" y2="20"></line><line x1="8.12" y1="8.12" x2="12" y2="12"></line></svg></div>
+                    <h3>Монтаж & VFX</h3>
+                    <p>Динамичный кат, саунд-дизайн, подбор лицензионной музыки и добавление визуальных эффектов.</p>
+                </div>
+
+                <div class="swiper-slide service-card reveal" style="transition-delay: 0.2s;">
+                    <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg></div>
+                    <h3>Цветокоррекция</h3>
+                    <p>Профессиональный color grading. Создание нужной атмосферы и дорогого голливудского лука.</p>
+                </div>
+
+                <div class="swiper-slide service-card reveal" style="transition-delay: 0.3s;">
+                    <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect><line x1="12" y1="18" x2="12.01" y2="18"></line></svg></div>
+                    <h3>Reels / TikTok</h3>
+                    <p>Вертикальный контент, который залетает в реки. Съемка, динамичный монтаж и адаптация.</p>
+                </div>
+
+                <div class="swiper-slide service-card reveal" style="transition-delay: 0.4s;">
+                    <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3-1.9 5.8a2 2 0 0 1-1.3 1.3L3 12l5.8 1.9a2 2 0 0 1 1.3 1.3L12 21l1.9-5.8a2 2 0 0 1 1.3-1.3L21 12l-5.8-1.9a2 2 0 0 1-1.3-1.3L12 3Z"></path></svg></div>
+                    <h3>AI & Нейросети</h3>
+                    <p>Генерация футажа, студийная переозвучка на другие языки, идеальный липсинк и аватары.</p>
+                </div>
             </div>
+            <div class="swiper-pagination"></div>
         </div>
-    </section>
+    </div>
+</section>
 
     <section id="portfolio">
         <h2 class="section-title reveal"><span>Шоурил</span> Избранные кейсы</h2>
-
         <div class="portfolio-grid">
             <div class="portfolio-item reveal">
                 <video src="reel-1.mp4" muted loop playsinline></video>
@@ -142,7 +146,6 @@
                     <p>Reels • Монтаж</p>
                 </div>
             </div>
-
             <div class="portfolio-item reveal" style="transition-delay: 0.1s;">
                 <video src="reel-2.mp4" muted loop playsinline></video>
                 <i class="fa-solid fa-play play-icon"></i>
@@ -151,7 +154,6 @@
                     <p>Промо • TikTok</p>
                 </div>
             </div>
-
             <div class="portfolio-item reveal" style="transition-delay: 0.2s;">
                 <video src="reel-3.mp4" muted loop playsinline></video>
                 <i class="fa-solid fa-play play-icon"></i>
@@ -165,7 +167,6 @@
 
     <section id="platforms">
         <h2 class="section-title reveal"><span>Дистрибуция контента</span> Платформы</h2>
-
         <div class="platforms-wrapper reveal">
             <div class="platform-item">
                 <i class="fa-brands fa-instagram platform-icon"></i>
@@ -175,40 +176,36 @@
                     <div class="tooltip-pros"><strong>Плюсы:</strong> Платежеспособная аудитория, легкий перевод трафика в воронки.</div>
                 </div>
             </div>
-
             <div class="platform-item">
                 <i class="fa-brands fa-telegram platform-icon"></i>
                 <div class="platform-tooltip">
                     <div class="tooltip-title">Telegram</div>
                     <div class="tooltip-desc"><strong>Для чего:</strong> Закрытое комьюнити, лонгриды, подкасты, прямая связь.</div>
-                    <div class="tooltip-pros"><strong>Плюсы:</strong> Нет умной ленты, максимальная конверсия лояльной базы.</div>
+                    <div class="tooltip-pros"><strong>Плюсы:</strong> Нет "умной ленты", максимальная конверсия лояльной базы.</div>
                 </div>
             </div>
-
             <div class="platform-item">
                 <i class="fa-brands fa-vk platform-icon"></i>
                 <div class="platform-tooltip">
                     <div class="tooltip-title">ВКонтакте</div>
                     <div class="tooltip-desc"><strong>Для чего:</strong> Построение сообщества, кросс-постинг видео и статей.</div>
-                    <div class="tooltip-pros"><strong>Плюсы:</strong> Мощный рекламный кабинет, официальный таргет РФ, органика в Клипах.</div>
+                    <div class="tooltip-pros"><strong>Плюсы:</strong> Мощный рекламный кабинет, официальный таргет (РФ), органика в Клипах.</div>
                 </div>
             </div>
-
             <div class="platform-item">
                 <i class="fa-brands fa-tiktok platform-icon"></i>
                 <div class="platform-tooltip">
                     <div class="tooltip-title">TikTok</div>
                     <div class="tooltip-desc"><strong>Для чего:</strong> Динамичный, трендовый и виральный контент.</div>
-                    <div class="tooltip-pros"><strong>Плюсы:</strong> Сильные алгоритмы рекомендаций, быстрый органический рост с нуля.</div>
+                    <div class="tooltip-pros"><strong>Плюсы:</strong> Самые сильные алгоритмы рекомендаций, быстрый органический рост с нуля.</div>
                 </div>
             </div>
-
             <div class="platform-item">
                 <i class="fa-brands fa-youtube platform-icon"></i>
                 <div class="platform-tooltip">
                     <div class="tooltip-title">YouTube</div>
                     <div class="tooltip-desc"><strong>Для чего:</strong> Экспертные видео, подкасты, привлечение холодной аудитории.</div>
-                    <div class="tooltip-pros"><strong>Плюсы:</strong> Вечнозеленый контент, поиск, высокий уровень доверия.</div>
+                    <div class="tooltip-pros"><strong>Плюсы:</strong> Вечнозеленый контент, высочайшее доверие.</div>
                 </div>
             </div>
         </div>
@@ -220,84 +217,68 @@
                 <h2 class="section-title">Анкета проекта</h2>
                 <p class="section-subtitle">Заполните бриф, чтобы мы могли точнее оценить задачу, сроки и бюджет.</p>
             </div>
-
             <div class="brief-card">
-                <form id="briefForm" class="brief-form">
+               <form id="briefForm" class="brief-form">
                     <div class="form-group">
                         <label>1. Как вас зовут и как с вами удобнее связаться? *</label>
                         <input type="text" id="q1" class="form-control" placeholder="Имя, Telegram / Телефон" required>
                     </div>
-
                     <div class="form-group">
                         <label>2. Название компании / бренда *</label>
                         <input type="text" id="q2" class="form-control" placeholder="Название компании" required>
                     </div>
-
                     <div class="form-group">
-                        <label>3. Для кого создается контент? *</label>
+                        <label>3. Для кого создаётся контент? *</label>
                         <input type="text" id="q3" class="form-control" placeholder="Личный блог, бренд, продукт..." required>
                     </div>
-
                     <div class="form-group">
                         <label>4. Какие платформы планируете развивать? *</label>
                         <input type="text" id="q4" class="form-control" placeholder="Inst, TikTok, YouTube, TG, VK..." required>
                     </div>
-
                     <div class="form-group full-width">
                         <label>5. Ссылки на действующие соцсети, сайт или портфолио *</label>
                         <textarea id="q5" class="form-control" rows="2" placeholder="Вставьте ссылки здесь" required></textarea>
                     </div>
-
                     <div class="form-group full-width">
                         <label>6. Какая основная цель видеоконтента? *</label>
                         <textarea id="q6" class="form-control" rows="2" placeholder="Например: узнаваемость, продажи, имидж" required></textarea>
                     </div>
-
                     <div class="form-group full-width">
                         <label>7. Какое направление контента вам интересно?</label>
                         <textarea id="q7" class="form-control" rows="2" placeholder="Reels, реклама, интервью, подкасты..."></textarea>
                     </div>
-
                     <div class="form-group">
                         <label>8. Сколько публикаций в неделю/месяц хотите?</label>
                         <input type="text" id="q8" class="form-control" placeholder="Например: 3 Reels в неделю">
                     </div>
-
                     <div class="form-group">
                         <label>9. Использование нейросетей</label>
                         <input type="text" id="q9" class="form-control" placeholder="Да, интересно / Нет">
                     </div>
-
                     <div class="form-group full-width">
                         <label>10. Какие форматы видео вам нужны?</label>
                         <textarea id="q10" class="form-control" rows="2" placeholder="Вертикальные, горизонтальные, сторис..."></textarea>
                     </div>
-
                     <div class="form-group">
                         <label>11. Есть контент-стратегия или нужна помощь?</label>
                         <input type="text" id="q11" class="form-control" placeholder="Есть / Нужна помощь">
                     </div>
-
                     <div class="form-group full-width">
                         <label>12. Кто ваша целевая аудитория?</label>
                         <textarea id="q12" class="form-control" rows="2" placeholder="Возраст, интересы, гео, доход..."></textarea>
                     </div>
-
                     <div class="form-group full-width">
                         <label>13. Примеры видео/аккаунтов, которые вам нравятся</label>
                         <textarea id="q13" class="form-control" rows="2" placeholder="Ссылки на референсы"></textarea>
                     </div>
-
                     <div class="form-group">
                         <label>14. Для Telegram: сколько постов нужно?</label>
                         <input type="text" id="q14" class="form-control" placeholder="Кол-во публикаций">
                     </div>
-
                     <div class="form-group full-width">
                         <label>15. Какие задачи хотите передать нам?</label>
                         <textarea id="q15" class="form-control" rows="2" placeholder="Идея, сценарий, монтаж..."></textarea>
                     </div>
-
                     <div class="form-group full-width submit-group">
                         <button type="submit" class="submit-btn">Отправить бриф на оценку</button>
                     </div>
@@ -312,340 +293,343 @@
                 <span>Telegram</span>
                 <a href="https://t.me/belyy2472" target="_blank">@belyy2472</a>
             </div>
-
             <div class="contact-card">
                 <span>WhatsApp / Phone</span>
                 <a href="tel:+375298224524">+375 29 822-45-24</a>
             </div>
         </div>
-
         <div class="contact-links reveal">
             <div class="contact-card">
                 <span>Telegram</span>
                 <a href="https://t.me/beliavski_ivan" target="_blank">@beliavski_ivan</a>
             </div>
-
             <div class="contact-card">
                 <span>WhatsApp / Phone</span>
                 <a href="tel:+375298420890">+375 29 842-08-90</a>
             </div>
         </div>
-
         <p class="copyright">© 2024 PRODUCTION.</p>
     </footer>
-
+    
     <script>
-        if ("scrollRestoration" in history) {
-            history.scrollRestoration = "manual";
+        if ('scrollRestoration' in history) {
+            history.scrollRestoration = 'manual';
         }
-
-        window.addEventListener("beforeunload", () => {
-            window.scrollTo(0, 0);
-        });
-
-        window.addEventListener("load", () => {
-            window.scrollTo(0, 0);
-            setTimeout(() => document.body.classList.add("loaded"), 300);
-        });
-
-        const isMobile = window.matchMedia("(max-width: 768px)").matches;
+        window.scrollTo(0, 0);
 
         const revealObserver = new IntersectionObserver((entries, observer) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    entry.target.classList.add("active");
+                    entry.target.classList.add('active');
                     observer.unobserve(entry.target);
                 }
             });
-        }, {
-            threshold: 0.1,
-            rootMargin: "0px 0px -50px 0px"
-        });
+        }, { threshold: 0.1, rootMargin: "0px 0px -50px 0px" });
+        
+        document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
 
-        document.querySelectorAll(".reveal").forEach(el => revealObserver.observe(el));
+        const isMobile = window.matchMedia("(max-width: 768px)").matches;
 
-        document.querySelectorAll(".btn, .submit-btn").forEach(button => {
-            button.addEventListener("click", function(e) {
+        document.querySelectorAll('.btn, .submit-btn').forEach(button => {
+            button.addEventListener('click', function(e) {
                 const rect = this.getBoundingClientRect();
-                const ripple = document.createElement("span");
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
 
-                ripple.classList.add("ripple");
-                ripple.style.left = `${e.clientX - rect.left}px`;
-                ripple.style.top = `${e.clientY - rect.top}px`;
+                const ripple = document.createElement('span');
+                ripple.classList.add('ripple');
+                ripple.style.left = `${x}px`;
+                ripple.style.top = `${y}px`;
 
                 this.appendChild(ripple);
                 setTimeout(() => ripple.remove(), 600);
             });
         });
 
-        document.querySelectorAll(".portfolio-item").forEach(item => {
-            const video = item.querySelector("video");
-            const icon = item.querySelector(".play-icon");
-
-            if (!video) return;
-
+        document.querySelectorAll('.portfolio-item').forEach(item => {
+            const video = item.querySelector('video');
+            
             if (!isMobile) {
-                item.addEventListener("mouseenter", () => video.play());
-                item.addEventListener("mouseleave", () => video.pause());
+                item.addEventListener('mouseenter', () => video.play());
+                item.addEventListener('mouseleave', () => video.pause());
             } else {
-                item.addEventListener("click", () => {
+                item.addEventListener('click', () => {
+                    const icon = item.querySelector('.play-icon');
                     if (video.paused) {
                         video.play();
-                        if (icon) icon.style.opacity = "0";
-                        video.style.filter = "grayscale(0%) brightness(1)";
+                        icon.style.opacity = '0';
+                        video.style.filter = 'grayscale(0%) brightness(1)';
                     } else {
                         video.pause();
-                        if (icon) icon.style.opacity = "1";
-                        video.style.filter = "grayscale(50%) brightness(0.6)";
+                        icon.style.opacity = '1';
+                        video.style.filter = 'grayscale(50%) brightness(0.6)';
                     }
                 });
             }
         });
 
         if (!isMobile) {
-            const cursorDot = document.querySelector(".cursor-dot");
-            const cursorOutline = document.querySelector(".cursor-outline");
+            const cursorDot = document.querySelector('.cursor-dot');
+            const cursorOutline = document.querySelector('.cursor-outline');
+            
+            let outlineX = 0, outlineY = 0, mouseX = 0, mouseY = 0;
 
-            let outlineX = 0;
-            let outlineY = 0;
-            let mouseX = 0;
-            let mouseY = 0;
-
-            window.addEventListener("mousemove", e => {
+            window.addEventListener('mousemove', (e) => {
                 mouseX = e.clientX;
                 mouseY = e.clientY;
-
-                if (cursorDot) {
+                if(cursorDot) {
                     cursorDot.style.left = `${mouseX}px`;
                     cursorDot.style.top = `${mouseY}px`;
                 }
             });
 
             function animateCursor() {
-                outlineX += (mouseX - outlineX) * 0.15;
-                outlineY += (mouseY - outlineY) * 0.15;
-
-                if (cursorOutline) {
+                let distX = mouseX - outlineX;
+                let distY = mouseY - outlineY;
+                outlineX += distX * 0.15;
+                outlineY += distY * 0.15;
+                if(cursorOutline) {
                     cursorOutline.style.left = `${outlineX}px`;
                     cursorOutline.style.top = `${outlineY}px`;
                 }
-
                 requestAnimationFrame(animateCursor);
             }
-
             animateCursor();
 
-            document.querySelectorAll("a, .btn, .portfolio-item, .platform-icon").forEach(el => {
-                el.addEventListener("mouseenter", () => {
-                    cursorOutline?.classList.add("hovered");
-                    cursorDot?.classList.add("hovered");
+            const hoverElements = document.querySelectorAll('a, .btn, .portfolio-item, .platform-icon');
+            hoverElements.forEach(el => {
+                el.addEventListener('mouseenter', () => {
+                    cursorOutline?.classList.add('hovered');
+                    cursorDot?.classList.add('hovered');
                 });
-
-                el.addEventListener("mouseleave", () => {
-                    cursorOutline?.classList.remove("hovered");
-                    cursorDot?.classList.remove("hovered");
+                el.addEventListener('mouseleave', () => {
+                    cursorOutline?.classList.remove('hovered');
+                    cursorDot?.classList.remove('hovered');
                 });
             });
 
-            const heroSection = document.querySelector(".hero");
-            const desktopHeroContent = document.querySelector(".hero-content");
+            const heroSection = document.querySelector('.hero');
+            const heroContent = document.querySelector('.hero-content');
 
-            if (heroSection && desktopHeroContent) {
-                heroSection.addEventListener("mousemove", e => {
+            if(heroSection && heroContent) {
+                heroSection.addEventListener('mousemove', (e) => {
                     const xAxis = (window.innerWidth / 2 - e.pageX) / 25;
                     const yAxis = (window.innerHeight / 2 - e.pageY) / 25;
-
-                    desktopHeroContent.style.transform = `translate(${xAxis}px, ${yAxis}px)`;
+                    heroContent.style.transform = `translate(${xAxis}px, ${yAxis}px)`;
                 });
 
-                heroSection.addEventListener("mouseleave", () => {
-                    desktopHeroContent.style.transform = "translate(0px, 0px)";
-                    desktopHeroContent.style.transition = "transform 0.5s ease";
+                heroSection.addEventListener('mouseleave', () => {
+                    heroContent.style.transform = `translate(0px, 0px)`;
+                    heroContent.style.transition = `transform 0.5s ease`;
                 });
-
-                heroSection.addEventListener("mouseenter", () => {
-                    desktopHeroContent.style.transition = "transform 0.1s linear";
+                
+                heroSection.addEventListener('mouseenter', () => {
+                    heroContent.style.transition = `transform 0.1s linear`;
                 });
             }
 
-            document.querySelectorAll(".portfolio-item").forEach(card => {
-                card.addEventListener("mousemove", e => {
+            // ТЕПЕРЬ 3D ЭФФЕКТ РАБОТАЕТ И ДЛЯ ПОРТФОЛИО, И ДЛЯ УСЛУГ
+            const cards = document.querySelectorAll('.portfolio-item, .service-card');
+            cards.forEach(card => {
+                card.addEventListener('mousemove', (e) => {
                     const rect = card.getBoundingClientRect();
                     const x = e.clientX - rect.left;
                     const y = e.clientY - rect.top;
                     const centerX = rect.width / 2;
                     const centerY = rect.height / 2;
-
+                    
                     const rotateX = ((y - centerY) / centerY) * -12;
                     const rotateY = ((x - centerX) / centerX) * 12;
                     const glareX = (x / rect.width) * 200 - 100;
 
-                    card.style.transform = `perspective(1000px) scale(1.08) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
-                    card.style.setProperty("--glare-pos", `${glareX}%`);
+                    card.style.transform = `perspective(1000px) scale(1.05) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+                    card.style.setProperty('--glare-pos', `${glareX}%`);
                 });
 
-                card.addEventListener("mouseleave", () => {
-                    card.style.transform = "perspective(1000px) scale(1) rotateX(0deg) rotateY(0deg)";
+                card.addEventListener('mouseleave', () => {
+                    card.style.transform = `perspective(1000px) scale(1) rotateX(0deg) rotateY(0deg)`;
                 });
             });
 
-            const glareStyle = document.createElement("style");
-            glareStyle.innerHTML = "@media (min-width: 769px) { .portfolio-item::after { transform: translateX(var(--glare-pos, -100%)); } }";
-            document.head.appendChild(glareStyle);
+            // ДОБАВЛЯЕМ КРУТОЙ БЛИК (СТЕКЛО)
+            const style = document.createElement('style');
+            style.innerHTML = `@media (min-width: 769px) { 
+                .portfolio-item::after, .service-card::after { 
+                    content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%; 
+                    background: linear-gradient(105deg, transparent 20%, rgba(255, 255, 255, 0.15) 25%, transparent 30%); 
+                    z-index: 4; pointer-events: none; opacity: 0; transition: opacity 0.3s; 
+                    transform: translateX(var(--glare-pos, -100%)); 
+                } 
+                .portfolio-item:hover::after, .service-card:hover::after { opacity: 1; } 
+            }`;
+            document.head.appendChild(style);
         }
 
+        window.addEventListener('load', () => {
+            setTimeout(() => document.body.classList.add('loaded'), 300);
+        });
+
+        document.addEventListener("DOMContentLoaded", () => {
+            const briefForm = document.getElementById("briefForm");
+
+            const tokenPart1 = "8892558629"; 
+            const tokenPart2 = "AAFwZCobeO1kYWD58TRWxlNjPJuW8S7_9oU"; 
+            const BOT_TOKEN = tokenPart1 + ":" + tokenPart2; 
+            const CHAT_ID = "1210738132"; 
+
+            if (briefForm) {
+                briefForm.addEventListener("submit", async (e) => {
+                    e.preventDefault(); 
+                    
+                    const submitBtn = briefForm.querySelector('.submit-btn');
+                    const originalText = submitBtn.innerText;
+                    
+                    submitBtn.innerText = "Отправка...";
+                    submitBtn.style.opacity = "0.7";
+                    submitBtn.style.pointerEvents = "none";
+
+                    const q1 = document.getElementById('q1').value || "Не указано";
+                    const q2 = document.getElementById('q2').value || "Не указано";
+                    const q3 = document.getElementById('q3').value || "Не указано";
+                    const q4 = document.getElementById('q4').value || "Не указано";
+                    const q5 = document.getElementById('q5').value || "Не указано";
+                    const q6 = document.getElementById('q6').value || "Не указано";
+                    const q7 = document.getElementById('q7').value || "Не указано";
+                    const q8 = document.getElementById('q8').value || "Не указано";
+                    const q9 = document.getElementById('q9').value || "Не указано";
+                    const q10 = document.getElementById('q10').value || "Не указано";
+                    const q11 = document.getElementById('q11').value || "Не указано";
+                    const q12 = document.getElementById('q12').value || "Не указано";
+                    const q13 = document.getElementById('q13').value || "Не указано";
+                    const q14 = document.getElementById('q14').value || "Не указано";
+                    const q15 = document.getElementById('q15').value || "Не указано";
+
+                    const textMessage = `
+🔥 <b>Новый заполненный бриф с сайта!</b>
+
+👤 <b>1. Контакты:</b> ${q1}
+🏢 <b>2. Компания:</b> ${q2}
+🎯 <b>3. Для кого:</b> ${q3}
+📱 <b>4. Платформы:</b> ${q4}
+🔗 <b>5. Ссылки:</b> ${q5}
+🚀 <b>6. Цель:</b> ${q6}
+
+🎥 <b>7. Направление:</b> ${q7}
+📅 <b>8. Частота публикаций:</b> ${q8}
+🤖 <b>9. Нейросети:</b> ${q9}
+🎬 <b>10. Форматы:</b> ${q10}
+📋 <b>11. Стратегия:</b> ${q11}
+👥 <b>12. Аудитория:</b> ${q12}
+👀 <b>13. Референсы:</b> ${q13}
+✈️ <b>14. TG посты:</b> ${q14}
+⚙️ <b>15. Задачи:</b> ${q15}
+                    `;
+
+                    const url = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`;
+
+                    try {
+                        const response = await fetch(url, {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({
+                                chat_id: CHAT_ID,
+                                text: textMessage,
+                                parse_mode: 'HTML'
+                            })
+                        });
+
+                        if (response.ok) {
+                            submitBtn.innerText = "Успешно отправлено!";
+                            submitBtn.style.backgroundColor = "#ffffff";
+                            submitBtn.style.opacity = "1";
+                            
+                            setTimeout(() => {
+                                briefForm.reset();
+                                submitBtn.innerText = originalText;
+                                submitBtn.style.backgroundColor = "#a3e635";
+                                submitBtn.style.pointerEvents = "auto";
+                            }, 3000);
+                        } else {
+                            throw new Error('Ошибка сети');
+                        }
+                    } catch (error) {
+                        submitBtn.innerText = "Ошибка отправки!";
+                        submitBtn.style.backgroundColor = "#ff4444";
+                        submitBtn.style.color = "#fff";
+                        
+                        setTimeout(() => {
+                            submitBtn.innerText = originalText;
+                            submitBtn.style.backgroundColor = "#a3e635";
+                            submitBtn.style.color = "#000";
+                            submitBtn.style.pointerEvents = "auto";
+                        }, 3000);
+                    }
+                });
+            }
+        });
+
+        // ==========================================
+        // ЭКСТРЕМАЛЬНЫЕ ФИШКИ ДЛЯ ТЕЛЕФОНА
+        // ==========================================
         if (isMobile) {
-            if (typeof Swiper !== "undefined") {
+            
+            if (typeof Swiper !== 'undefined') {
                 new Swiper(".mySwiper", {
                     effect: "coverflow",
                     grabCursor: true,
                     centeredSlides: true,
                     slidesPerView: "auto",
-                    spaceBetween: 18,
+                    spaceBetween: 20, // Немного увеличили расстояние
                     loop: false,
                     coverflowEffect: {
-                        rotate: 12,
+                        rotate: 15, // Сильнее наклон
                         stretch: 0,
-                        depth: 120,
-                        modifier: 1,
-                        slideShadows: false
+                        depth: 200, // Глубже уходит назад
+                        modifier: 1.2, 
+                        slideShadows: true // Включили 3D тени
                     },
                     pagination: {
                         el: ".swiper-pagination",
                         clickable: true
-                    }
+                    }  
                 });
             }
 
-            const mobileHeroContent = document.querySelector(".hero-content");
-            const mobileHeroVideo = document.querySelector(".hero-video");
-            const header = document.querySelector("header");
-
-            window.addEventListener("scroll", () => {
-                const scrollY = window.scrollY;
-
-                if (scrollY < window.innerHeight && mobileHeroContent && mobileHeroVideo) {
-                    mobileHeroContent.style.transform = `translateY(${scrollY * 0.4}px)`;
-                    mobileHeroContent.style.opacity = Math.max(0, 1 - scrollY / 400);
-                    mobileHeroVideo.style.transform = `translateY(${scrollY * 0.15}px)`;
+            const heroContent = document.querySelector('.hero-content');
+            const heroVideo = document.querySelector('.hero-video');
+            
+            window.addEventListener('scroll', () => {
+                let scrollY = window.scrollY;
+                if(scrollY < window.innerHeight) {
+                    if(heroContent) {
+                        heroContent.style.transform = `translateY(${scrollY * 0.4}px)`;
+                        heroContent.style.opacity = Math.max(0, 1 - (scrollY / 400)); 
+                    }
+                    if(heroVideo) heroVideo.style.transform = `translateY(${scrollY * 0.15}px)`;
                 }
-            }, { passive: true });
+            }, {passive: true});
 
             let lastScrollTop = 0;
-
-            window.addEventListener("scroll", () => {
-                const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-
-                if (!header) return;
-
-                if (scrollTop > 100) {
+            const header = document.querySelector('header');
+            
+            window.addEventListener('scroll', () => {
+                if(!header) return;
+                let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                if (scrollTop > 100) { 
                     if (scrollTop > lastScrollTop) {
-                        header.style.transform = "translateY(-100%)";
+                        header.style.transform = 'translateY(-100%)';
                     } else {
-                        header.style.transform = "translateY(0)";
-                        header.style.background = "rgba(5, 5, 5, 0.95)";
+                        header.style.transform = 'translateY(0)';
+                        header.style.background = 'rgba(5, 5, 5, 0.95)'; 
                     }
                 } else {
-                    header.style.transform = "translateY(0)";
-                    header.style.background = "rgba(5, 5, 5, 0.85)";
+                    header.style.transform = 'translateY(0)';
+                    header.style.background = 'rgba(5, 5, 5, 0.85)';
                 }
-
                 lastScrollTop = Math.max(0, scrollTop);
-            }, { passive: true });
+            }, {passive: true});
         }
-
-        const briefForm = document.getElementById("briefForm");
-
-        function escapeHtml(value) {
-            return String(value)
-                .replaceAll("&", "&amp;")
-                .replaceAll("<", "&lt;")
-                .replaceAll(">", "&gt;");
-        }
-
-        function fieldValue(id) {
-            const field = document.getElementById(id);
-            return escapeHtml(field?.value.trim() || "Не указано");
-        }
-
-        if (briefForm) {
-            briefForm.addEventListener("submit", async e => {
-                e.preventDefault();
-
-                const submitBtn = briefForm.querySelector(".submit-btn");
-                const originalText = submitBtn.innerText;
-
-                submitBtn.innerText = "Отправка...";
-                submitBtn.style.opacity = "0.7";
-                submitBtn.style.pointerEvents = "none";
-
-                const BOT_TOKEN = "ВСТАВЬ_СЮДА_НОВЫЙ_BOT_TOKEN";
-                const CHAT_ID = "ВСТАВЬ_СЮДА_CHAT_ID";
-
-                const textMessage = `
-🔥 <b>Новый заполненный бриф с сайта!</b>
-
-👤 <b>1. Контакты:</b> ${fieldValue("q1")}
-🏢 <b>2. Компания:</b> ${fieldValue("q2")}
-🎯 <b>3. Для кого:</b> ${fieldValue("q3")}
-📱 <b>4. Платформы:</b> ${fieldValue("q4")}
-🔗 <b>5. Ссылки:</b> ${fieldValue("q5")}
-🚀 <b>6. Цель:</b> ${fieldValue("q6")}
-
-🎥 <b>7. Направление:</b> ${fieldValue("q7")}
-📅 <b>8. Частота публикаций:</b> ${fieldValue("q8")}
-🤖 <b>9. Нейросети:</b> ${fieldValue("q9")}
-🎬 <b>10. Форматы:</b> ${fieldValue("q10")}
-📋 <b>11. Стратегия:</b> ${fieldValue("q11")}
-👥 <b>12. Аудитория:</b> ${fieldValue("q12")}
-👀 <b>13. Референсы:</b> ${fieldValue("q13")}
-✈️ <b>14. TG посты:</b> ${fieldValue("q14")}
-⚙️ <b>15. Задачи:</b> ${fieldValue("q15")}
-                `;
-
-                try {
-                    const response = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
-                        method: "POST",
-                        headers: {
-                            "Content-Type": "application/json"
-                        },
-                        body: JSON.stringify({
-                            chat_id: CHAT_ID,
-                            text: textMessage,
-                            parse_mode: "HTML"
-                        })
-                    });
-
-                    if (!response.ok) {
-                        throw new Error("Ошибка отправки");
-                    }
-
-                    submitBtn.innerText = "Успешно отправлено!";
-                    submitBtn.style.backgroundColor = "#ffffff";
-                    submitBtn.style.opacity = "1";
-
-                    setTimeout(() => {
-                        briefForm.reset();
-                        submitBtn.innerText = originalText;
-                        submitBtn.style.backgroundColor = "#a3e635";
-                        submitBtn.style.color = "#000";
-                        submitBtn.style.pointerEvents = "auto";
-                    }, 3000);
-                } catch (error) {
-                    submitBtn.innerText = "Ошибка отправки!";
-                    submitBtn.style.backgroundColor = "#ff4444";
-                    submitBtn.style.color = "#fff";
-                    submitBtn.style.opacity = "1";
-
-                    setTimeout(() => {
-                        submitBtn.innerText = originalText;
-                        submitBtn.style.backgroundColor = "#a3e635";
-                        submitBtn.style.color = "#000";
-                        submitBtn.style.pointerEvents = "auto";
-                    }, 3000);
-                }
-            });
-        }
+        
     </script>
 </body>
 </html>
