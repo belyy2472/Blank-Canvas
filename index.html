@@ -429,8 +429,19 @@
             }
 
             // ТЕПЕРЬ 3D ЭФФЕКТ РАБОТАЕТ И ДЛЯ ПОРТФОЛИО, И ДЛЯ УСЛУГ
+                        // ТЕПЕРЬ 3D ЭФФЕКТ РАБОТАЕТ И ДЛЯ ПОРТФОЛИО, И ДЛЯ УСЛУГ
             const cards = document.querySelectorAll('.portfolio-item, .service-card');
             cards.forEach(card => {
+                
+                // 1. КОГДА МЫШКА КАСАЕТСЯ КАРТОЧКИ
+                card.addEventListener('mouseenter', () => {
+                    // ИСПРАВЛЕНИЕ БАГА: Убиваем стартовую задержку, из-за которой висли 2 и 3 видео!
+                    card.style.transitionDelay = '0s';
+                    // Делаем поворот быстрым и четким за мышкой (без кисельности)
+                    card.style.transitionDuration = '0.1s';
+                });
+
+                // 2. КОГДА МЫШКА ДВИГАЕТСЯ ПО КАРТОЧКЕ
                 card.addEventListener('mousemove', (e) => {
                     const rect = card.getBoundingClientRect();
                     const x = e.clientX - rect.left;
@@ -446,11 +457,13 @@
                     card.style.setProperty('--glare-pos', `${glareX}%`);
                 });
 
+                // 3. КОГДА МЫШКА УХОДИТ
                 card.addEventListener('mouseleave', () => {
+                    // Возвращаем длинную плавность, чтобы карточка мягко и красиво вернулась на место
+                    card.style.transitionDuration = '0.5s';
                     card.style.transform = `perspective(1000px) scale(1) rotateX(0deg) rotateY(0deg)`;
                 });
             });
-
             // ДОБАВЛЯЕМ КРУТОЙ БЛИК (СТЕКЛО)
             const style = document.createElement('style');
             style.innerHTML = `@media (min-width: 769px) { 
